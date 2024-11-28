@@ -4,11 +4,12 @@ import Dashboard from '../pages/Dashboard';
 import NoExisto from '../pages/NoExisto';
 import Usuarios from '../pages/Usuarios';
 import Login from '../pages/Login';
+
 import Inicio from '../pages/Inicio';
 import { AuthProvider } from '../context/AuthContext';
 import ProtectedRoute from '../pages/ProtectedRoute';
-import { ToastContainer } from 'react-toastify';  // Importa ToastContainer
-import 'react-toastify/dist/ReactToastify.css';  // Importa los estilos de react-toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AppRouter() {
     return (
