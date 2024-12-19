@@ -21,7 +21,17 @@ function Login() {
 
     useEffect(() => {
         if (isAuthenticated && user) {
-            navigate('/dashboard');
+            switch (user.role_id) {
+                case 1:
+                    navigate("/admin/dashboard");
+                    break;
+                case 2:
+                    navigate("/user/dashboard");
+                    break;
+                default:
+                    navigate("/");
+                    break;
+            }
         }
     }, [isAuthenticated, user, navigate])
 

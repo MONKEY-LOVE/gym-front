@@ -4,23 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const menuItems = [
-  { icon: HiHome, text: 'Dashboard', path: '/Dashboard' },
-  { icon: HiUsers, text: 'Usuarios', path: '/usuarios' },
-  { icon: HiDocumentText, text: 'Documentacion', path: '/documentation' },
-  { icon: HiChartBar, text: 'Estadisticas', path: '/statistics' },
-  { icon: HiCog, text: 'Configuracion', path: '/settings' },
-  { icon: HiSupport, text: 'Soporte', path: '/support' },
+  { icon: HiHome, text: 'Inicio', path: '/admin/dashboard', allowedRoles: [1] },
+  { icon: HiUsers, text: 'Usuarios', path: '/admin/usuarios', allowedRoles: [1] },
+  { icon: HiChartBar, text: 'Estadisticas', path: '/admin/estadisticas', allowedRoles: [1] },
+  { icon: HiDocumentText, text: 'Manual', path: '/admin/manual', allowedRoles: [1] },
+  { icon: HiCog, text: 'Configuracion', path: '/admin/settings', allowedRoles: [1] },
+  { icon: HiSupport, text: 'Soporte', path: '/admin/support', allowedRoles: [1] },
 ];
 
 export default function Sidebar({ isOpen }) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth(); // Acceso al usuario desde el contexto
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  if (!user || !user.role_id) {
+    return <div>Cargando...</div>;
   }
+
+  console.log("Role ID del usuario:", user.role_id);
+  console.log("Menu Items:", menuItems);
+
+
+  const filteredMenuItems = menuItems.filter((item) =>
+    item.allowedRoles.includes(Number(user.role_id))
+  );
+
+  console.log('Filtered Menu Items:', filteredMenuItems);
 
   return (
     <aside
@@ -35,30 +49,37 @@ export default function Sidebar({ isOpen }) {
       </div>
       <div className="px-4 py-6">
         <nav className="space-y-1">
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              to={item.path}
-              className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-colors ${location.pathname === item.path
-                ? 'bg-primary-50 text-primary-600'
-                : 'text-gray-600 hover:bg-gray-50'
-                }`}
-            >
-              <item.icon
-                className={`w-6 h-6 ${location.pathname === item.path
-                  ? 'text-primary-600'
-                  : 'text-gray-500'
+          {filteredMenuItems.length === 0 ? (
+            <div>No tienes acceso a ningún menú.</div> // Mensaje si no hay elementos para mostrar
+          ) : (
+            filteredMenuItems.map((item, index) => (
+              <Link
+                key={index}
+                to={item.path}
+                className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-colors ${location.pathname === item.path
+                  ? 'bg-primary-50 text-primary-600'
+                  : 'text-gray-600 hover:bg-gray-50'
                   }`}
-              />
-              <span className={location.pathname === item.path ? 'font-semibold' : 'font-medium'}>
-                {item.text}
-              </span>
-            </Link>
-          ))}
+              >
+                <item.icon
+                  className={`w-6 h-6 ${location.pathname === item.path
+                    ? 'text-primary-600'
+                    : 'text-gray-500'
+                    }`}
+                />
+                <span className={location.pathname === item.path ? 'font-semibold' : 'font-medium'}>
+                  {item.text}
+                </span>
+              </Link>
+            ))
+          )}
         </nav>
       </div>
       <div className="absolute bottom-0 w-full p-4">
-        <button className="flex items-center gap-4 px-4 py-3 w-full text-gray-600 hover:bg-gray-50 rounded-xl transition-colors" onClick={handleLogout}>
+        <button
+          className="flex items-center gap-4 px-4 py-3 w-full text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
+          onClick={handleLogout}
+        >
           <HiOutlineLogout className="w-6 h-6" />
           <span className="font-medium">Cerrar Sesion</span>
         </button>

@@ -1,8 +1,17 @@
-import axios from "axios";
+// axios.js
 
-const instance = axios.create({
-    baseURL: 'https://sea-turtle-app-l3p77.ondigitalocean.app/api/users',
-    withCredentials: true
-})
+import axios from 'axios';
 
-export default instance
+// Instancia de axios para usuarios
+const usersInstance = axios.create({
+    baseURL: 'http://localhost:3000/api/users',  // URL base para usuarios
+    withCredentials: true,
+});
+
+// Instancia de axios para planes
+const plansInstance = axios.create({
+    baseURL: 'http://localhost:3000/api/plans',  // URL base para planes
+    withCredentials: true,
+});
+
+export { usersInstance, plansInstance };

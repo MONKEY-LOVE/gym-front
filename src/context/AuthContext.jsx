@@ -33,10 +33,11 @@ export const AuthProvider = ({ children }) => {
             const res = await loginRequest(user);
             setUser(res.data);
 
-            const userData = await verifyTokenRequest(res.data.token); //ESTA ES PARA OBTENER LOS DATOS DEL USUARIO
-            setUser(userData.data); //SETEAR DATOS NO BORRAR XD
+            const userData = await verifyTokenRequest(res.data.token);
+            setUser(userData.data);
+            console.log(userData.data);
             setIsAuthenticated(true);
-            //setErrors(null); // Limpiar los errores si el login es exitoso
+
         } catch (error) {
             setErrors("Credenciales incorrectas");
             setIsAuthenticated(false);

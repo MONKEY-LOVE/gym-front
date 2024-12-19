@@ -1,47 +1,57 @@
-import { useEffect, useState } from 'react';
-import StatsCard from '../components/StatsCard';
-import { useNavigate } from 'react-router-dom';
-import { getTotalUsersRequest } from '../api/axios';
+import React, { useEffect, useState } from 'react';
+import { getUserProfileRequest } from '../api/axios';
 
-export default function Dashboard() {
-    const [totalUsers, setTotalUsers] = useState(null); // Estado para almacenar el total de usuarios
-    const [loading, setLoading] = useState(true); // Estado para indicar si se está cargando la data
-    const [error, setError] = useState(null); // Estado para manejar errores
-    const navigate = useNavigate();
+const Dashboard = () => {
+    const [userDetails, setUserDetails] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchTotalUsers = async () => {
+        const fetchUserProfile = async () => {
             try {
-                setLoading(true);
-                const response = await getTotalUsersRequest();
-                setTotalUsers(response.data.total.count); // Extrae el valor de `count`
+                const response = await getUserProfileRequest();
+                setUserDetails(response.data.userDetails); // Guardamos los detalles en el estado
             } catch (err) {
-                console.error("Error al obtener el total de usuarios:", err);
-                setError("No se pudo cargar el total de usuarios");
+                setError('Error al obtener los detalles del usuario');
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchTotalUsers();
+        fetchUserProfile();
     }, []);
 
-    const stats = [
-        { title: 'Usuarios', value: totalUsers || 'Cargando...', percentage: null },
-        { title: 'Ganancias', value: '46,590', percentage: 8.2 },
-        { title: 'Orders', value: '1,234', percentage: 5.4 },
-        { title: 'Products', value: '789', percentage: 15.6 },
-    ];
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('es-ES'); // Ajustamos el formato a español
+    };
+
+
+
+    if (loading) {
+        return <div>Cargando...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {loading && <p>Cargando estadísticas...</p>}
-            {error && <p className="text-red-500">{error}</p>}
-            {!loading &&
-                stats.map((stat, index) => (
-                    <StatsCard key={index} {...stat} />
-                ))
-            }
+        <div className="flex justify-center items-center flex-col space-y-8 p-6">
+            <h1 className="text-2xl font-bold text-gray-800">Bienvenido {userDetails.nombre}</h1>
+            <img src="https://png.pngtree.com/png-clipart/20200224/original/pngtree-cartoon-color-simple-male-avatar-png-image_5230557.jpg" width={250} />
+            <div className="max-w-sm w-full bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
+                <div className="text-gray-700">
+                    <p><strong>Nombre:</strong> {userDetails.nombre}</p>
+                    <p><strong>Apellidos:</strong> {userDetails.apellido_pat} {userDetails.apellido_mat}</p>
+                    <p><strong>Correo:</strong> {userDetails.correo}</p>
+                    <p><strong>Suscripción:</strong> {userDetails.suscripcion}</p>
+                    <p><strong>Fecha de inicio:</strong> {formatDate(userDetails.fecha_inicio)}</p>
+                    <p><strong>Fecha de expiración:</strong> {formatDate(userDetails.fecha_expiracion)}</p>
+                </div>
+            </div>
         </div>
     );
-}
+};
+
+export default Dashboard;

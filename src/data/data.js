@@ -1,6 +1,6 @@
 import { HiUserAdd, HiClock, HiCheck } from 'react-icons/hi';
 
-
+//ESTA DATA ES DE EJEMPLO NO SE ESTA USANDO ACTUALMENTE
 export const stats = [
     { title: 'Users', value: '2,847', percentage: 12 },
     { title: 'Revenue', value: '46,590', percentage: 8.2 },
