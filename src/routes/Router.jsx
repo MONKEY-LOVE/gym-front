@@ -10,7 +10,7 @@ import { AuthProvider } from '../context/AuthContext';
 import ProtectedRoute from '../pages/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Manual from '../pages/Manual';
+import Manual from '../pages/manual';
 import MenuUsuarios from '../components/Menu/Sidebar';  // Sidebar para usuario
 import MenuAdmin from '../components/Sidebar';          // Sidebar para admin
 
