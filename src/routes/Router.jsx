@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Manual from '../pages/manual';
 import MenuUsuarios from '../components/Menu/Sidebar';  // Sidebar para usuario
 import MenuAdmin from '../components/Sidebar';          // Sidebar para admin
+import Talleres from '../pages/Talleres';
 
 export default function AppRouter() {
     return (
@@ -34,9 +35,10 @@ export default function AppRouter() {
                     </Route>
 
                     {/* USUARIO NORMAL */}
-                    <Route element={<ProtectedRoute allowedRoles={[2]} />}>
+                    <Route element={<ProtectedRoute allowedRoles={[2, 3]} />}>
                         <Route element={<Layout Sidebar={MenuUsuarios} />}>
                             <Route path="/user/dashboard" element={<Dashboard />} />
+                            <Route path='/user/Talleres' element={<Talleres />} />
                         </Route>
                     </Route>
 

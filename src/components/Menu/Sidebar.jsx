@@ -5,7 +5,8 @@ import { useAuth } from '../../context/AuthContext';
 
 const menuItems = [
     { icon: HiHome, text: 'Inicio', path: '/user/dashboard', allowedRoles: [2] },
-    { icon: HiSupport, text: 'Talleres', path: '/user/users', allowedRoles: [2] },
+    { icon: HiSupport, text: 'Talleres', path: '/user/Talleres', allowedRoles: [2] },
+    { icon: HiUsers, text: 'Ver talleres', path: '/user/Talleres', allowedRoles: [3] },
 
 ];
 

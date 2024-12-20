@@ -5,14 +5,38 @@ import { UsersIcon, ChartBarIcon, CurrencyDollarIcon, CreditCardIcon } from '@he
 
 
 
-const monthlySubscriptions = [
-    { month: 'Jan', basic: 400, premium: 300, enterprise: 200 },
-    { month: 'Feb', basic: 500, premium: 400, enterprise: 250 },
-    { month: 'Mar', basic: 600, premium: 500, enterprise: 300 },
-    { month: 'Apr', basic: 550, premium: 450, enterprise: 280 },
-    { month: 'May', basic: 700, premium: 600, enterprise: 350 },
-    { month: 'Jun', basic: 800, premium: 700, enterprise: 400 },
+const suscripcionesMensuales = [
+    { mes: 'Ene', mensual: 400, Trimestral: 300, Semestral: 200, Anual: 100 },
+    { mes: 'Feb', mensual: 500, Trimestral: 400, Semestral: 250, Anual: 150 },
+    { mes: 'Mar', mensual: 600, Trimestral: 500, Semestral: 300, Anual: 200 },
+    { mes: 'Abr', mensual: 550, Trimestral: 450, Semestral: 280, Anual: 180 },
+    { mes: 'May', mensual: 700, Trimestral: 600, Semestral: 350, Anual: 250 },
+    { mes: 'Jun', mensual: 800, Trimestral: 700, Semestral: 400, Anual: 300 },
+    { mes: 'Jul', mensual: 750, Trimestral: 650, Semestral: 380, Anual: 280 },
+    { mes: 'Ago', mensual: 770, Trimestral: 690, Semestral: 390, Anual: 290 },
+    { mes: 'Sep', mensual: 720, Trimestral: 680, Semestral: 370, Anual: 270 },
+    { mes: 'Oct', mensual: 740, Trimestral: 700, Semestral: 380, Anual: 280 },
+    { mes: 'Nov', mensual: 760, Trimestral: 710, Semestral: 400, Anual: 300 },
+    { mes: 'Dic', mensual: 800, Trimestral: 750, Semestral: 420, Anual: 320 },
 ];
+
+
+const Talleres = [
+    { mes: 'Ene', cardio: 40, boxeo: 30, Yoga: 20 },
+    { mes: 'Feb', cardio: 50, boxeo: 40, Yoga: 25 },
+    { mes: 'Mar', cardio: 60, boxeo: 50, Yoga: 30 },
+    { mes: 'Abr', cardio: 55, boxeo: 40, Yoga: 28 },
+    { mes: 'May', cardio: 70, boxeo: 10, Yoga: 35 },
+    { mes: 'Jun', cardio: 80, boxeo: 20, Yoga: 40 },
+    { mes: 'Jul', cardio: 75, boxeo: 50, Yoga: 38 },
+    { mes: 'Ago', cardio: 77, boxeo: 60, Yoga: 39 },
+    { mes: 'Sep', cardio: 72, boxeo: 60, Yoga: 37 },
+    { mes: 'Oct', cardio: 74, boxeo: 70, Yoga: 38 },
+    { mes: 'Nov', cardio: 76, boxeo: 71, Yoga: 400 },
+    { mes: 'Dic', cardio: 8, boxeo: 70, Yoga: 42 },
+];
+
+
 
 const revenueData = [
     { month: 'Jan', revenue: 25000, subscribers: 900 },
@@ -85,15 +109,15 @@ const Stats = () => {
 
                 // Obtener total de usuarios
                 const userResponse = await getTotalUsersRequest();
-                setTotalUsers(userResponse.data.total.count);  // Accede a 'count' para los usuarios
+                setTotalUsers(userResponse.data.total.count);
 
                 // Obtener total de planes activos
                 const plansResponse = await getPlansRequest();
-                setTotalPlans(plansResponse.data.plans);  // Accede a 'plans' para los planes
+                setTotalPlans(plansResponse.data.plans);
 
                 // Obtener el dinero ganado este mes
                 const moneyResponse = await getPlanDineroRequest();
-                setTotalMoney(moneyResponse.data.dinero);  // Accede al dinero ganado este mes
+                setTotalMoney(moneyResponse.data.dinero);
 
                 setPlansLoading(false);
                 setMoneyLoading(false);
@@ -119,7 +143,7 @@ const Stats = () => {
                 // Si los datos para los gráficos están en 'subscriptions'
                 if (statsResponse && statsResponse.data && Array.isArray(statsResponse.data.subscriptions)) {
                     const subscriptions = statsResponse.data.subscriptions.map(item => ({
-                        name: item.tipo_plan,  // Asegúrate de que 'tipo_plan' sea correcto
+                        name: item.tipo_plan,
                         value: parseInt(item.total_personas, 10),  // Convertir 'total_personas' a número
                     }));
                     setSubscriptionsByType(subscriptions);
@@ -156,7 +180,7 @@ const Stats = () => {
         },
         {
             title: 'Total de ingresos',
-            value: '$29.80',
+            value: '$1.010.000',
             trend: 5,
             icon: CreditCardIcon,
         },
@@ -203,20 +227,21 @@ const Stats = () => {
 
                     <ChartCard title="Suscripciones adqueridas mes a mes">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={monthlySubscriptions}>
+                            <BarChart data={suscripcionesMensuales}>
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="month" />
                                 <YAxis />
                                 <Tooltip />
                                 <Legend />
-                                <Bar dataKey="basic" stackId="a" fill="#4f46e5" />
-                                <Bar dataKey="premium" stackId="a" fill="#3b82f6" />
-                                <Bar dataKey="enterprise" stackId="a" fill="#60a5fa" />
+                                <Bar dataKey="mensual" stackId="a" fill="#4f46e5" />
+                                <Bar dataKey="Trimestral" stackId="a" fill="#3b82f6" />
+                                <Bar dataKey="Semestral" stackId="a" fill="#60a5fa" />
+                                <Bar dataKey="Anual" stackId="a" fill="#93c5fd" />
                             </BarChart>
                         </ResponsiveContainer>
                     </ChartCard>
 
-                    <ChartCard title="Revenue & Subscriber Growth">
+                    <ChartCard title="Crecimiento de ingresos y suscriptores">
                         <ResponsiveContainer width="100%" height="100%">
                             <ComposedChart data={revenueData}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -232,7 +257,7 @@ const Stats = () => {
                     </ChartCard>
 
                     {/* Revenue Trend */}
-                    <ChartCard title="Monthly Revenue Trend">
+                    <ChartCard title="Tendencia de ingresos mensuales">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={revenueData}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -241,6 +266,22 @@ const Stats = () => {
                                 <Tooltip />
                                 <Area type="monotone" dataKey="revenue" stroke="#4f46e5" fill="#93c5fd" />
                             </AreaChart>
+                        </ResponsiveContainer>
+                    </ChartCard>
+
+                    {/* Talleres */}
+                    <ChartCard tittle="Talleres mas solicitados">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <BarChart data={Talleres}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="mes" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="cardio" stackId="a" fill="#4f46e5" />
+                                <Bar dataKey="boxeo" stackId="a" fill="#3b82f6" />
+                                <Bar dataKey="yoga" stackId="a" fill="#60a5fa" />
+                            </BarChart>
                         </ResponsiveContainer>
                     </ChartCard>
                 </div>

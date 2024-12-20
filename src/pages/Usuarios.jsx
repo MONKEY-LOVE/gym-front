@@ -112,20 +112,20 @@ const Usuarios = () => {
             return "";
         },
 
-        password: (value) => {
+        /*password: (value) => {
             if (!value) return "La contraseña es requerida";
             if (value.length < 8) return "La contraseña debe tener al menos 8 caracteres";
             if (!/\d/.test(value)) return "La contraseña debe contener al menos un número";
             if (!/[a-z]/.test(value)) return "La contraseña debe contener al menos una letra minúscula";
             if (!/[A-Z]/.test(value)) return "La contraseña debe contener al menos una letra mayúscula";
             return "";
-        },
+     
 
         confirmPassword: (value, formData) => {
             if (!value) return "Debe confirmar la contraseña";
             if (value !== formData.password) return "Las contraseñas no coinciden";
             return "";
-        }
+        }*/
     };
 
     const handleChange = (e) => {

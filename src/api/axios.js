@@ -7,7 +7,7 @@ export const loginRequest = user => usersInstance.post(`/login`, user);
 export const verifyTokenRequest = () => usersInstance.get(`/verify`);
 export const getUsersRequest = () => usersInstance.get(`/`);  // Para obtener todos los usuarios
 export const getTotalUsersRequest = () => usersInstance.get(`/total`);  // Para obtener el total de usuarios
-
+export const getTalleresRequest = () => usersInstance.get(`/talleres`);  // Para obtener los talleres
 
 export const getUserProfileRequest = () => {
     return usersInstance.get(`/profile`, {

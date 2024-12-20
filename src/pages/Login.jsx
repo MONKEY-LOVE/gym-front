@@ -28,6 +28,9 @@ function Login() {
                 case 2:
                     navigate("/user/dashboard");
                     break;
+                case 3:
+                    navigate("/user/dashboard");
+                    break;
                 default:
                     navigate("/");
                     break;
