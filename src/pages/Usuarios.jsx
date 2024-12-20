@@ -179,7 +179,7 @@ const Usuarios = () => {
         };
         //manda los datos a la api
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            const response = await fetch('https://sea-turtle-app-l3p77.ondigitalocean.app/api/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
