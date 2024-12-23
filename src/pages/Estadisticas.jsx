@@ -125,7 +125,7 @@ const Stats = () => {
             } catch (error) {
                 setError(error.message);
                 setPlansError(error.message);
-                setMoneyError(error.message); // Maneja error de dinero ganado
+                setMoneyError(error.message);
                 setLoading(false);
                 setPlansLoading(false);
                 setMoneyLoading(false);
@@ -138,13 +138,13 @@ const Stats = () => {
         const fetchPlansStats = async () => {
             try {
                 const statsResponse = await getPlansStatsRequest();
-                console.log(statsResponse);  // Verifica toda la respuesta aquí
+                console.log(statsResponse);
 
-                // Si los datos para los gráficos están en 'subscriptions'
+
                 if (statsResponse && statsResponse.data && Array.isArray(statsResponse.data.subscriptions)) {
                     const subscriptions = statsResponse.data.subscriptions.map(item => ({
                         name: item.tipo_plan,
-                        value: parseInt(item.total_personas, 10),  // Convertir 'total_personas' a número
+                        value: parseInt(item.total_personas, 10),
                     }));
                     setSubscriptionsByType(subscriptions);
                 }

@@ -8,7 +8,7 @@ const menuItems = [
   { icon: HiUsers, text: 'Usuarios', path: '/admin/usuarios', allowedRoles: [1] },
   { icon: HiChartBar, text: 'Estadisticas', path: '/admin/estadisticas', allowedRoles: [1] },
   { icon: HiDocumentText, text: 'Manual', path: '/admin/manual', allowedRoles: [1] },
-  { icon: HiCog, text: 'Configuracion', path: '/admin/settings', allowedRoles: [1] },
+  { icon: HiCog, text: 'Profile', path: '/admin/profile', allowedRoles: [1] },
   { icon: HiSupport, text: 'Soporte', path: '/admin/support', allowedRoles: [1] },
 ];
 

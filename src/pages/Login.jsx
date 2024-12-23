@@ -87,6 +87,11 @@ function Login() {
                     >
                         Iniciar Sesión
                     </button>
+                    <div className="mt-4 text-center">
+                        <Link to="/recover-password" className="text-sm text-gray-400 hover:text-gray-200">
+                            ¿Olvidaste tu contraseña?
+                        </Link>
+                    </div>
                 </form>
             </div>
         </div>

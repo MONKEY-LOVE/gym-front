@@ -7,17 +7,20 @@ import {
     ArrowDownTrayIcon
 } from '@heroicons/react/24/outline';
 
-function manual() {
+function Manual() {
     const documentationSections = [
         {
             title: 'Video Tutoriales',
             icon: VideoCameraIcon,
             items: [
-                'Agregar Usuarios',
-                'Asignar Roles',
-            ]
-        },
+                {
+                    title: 'Cómo crear un nuevo usuario',
+                    description: 'Aprende a crear un nuevo usuario en nuestra plataforma.',
+                    videoUrl: 'https://www.youtube.com/watch?v=AxjCSsBaCBs',
+                },
 
+            ],
+        },
     ];
 
     const handleDownloadManual = () => {
@@ -32,7 +35,7 @@ function manual() {
                 <div className="text-center mb-12">
                     <h1 className="text-3xl font-bold text-gray-900 mb-4">Manual de Usuario</h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        explora nuestra documentación para obtener ayuda con la configuración y el uso de nuestra plataforma.
+                        Explora nuestra documentación para obtener ayuda con la configuración y el uso de nuestra plataforma.
                     </p>
 
                     {/* Download Manual Button */}
@@ -53,13 +56,18 @@ function manual() {
                                 <section.icon className="h-8 w-8 text-indigo-600 mr-3" />
                                 <h2 className="text-xl font-semibold text-gray-900">{section.title}</h2>
                             </div>
-                            <p className="text-gray-600 mb-4">{section.description}</p>
-                            <ul className="space-y-2">
+                            <ul className="space-y-4">
                                 {section.items.map((item) => (
-                                    <li key={item} className="flex items-center">
-                                        <span className="w-2 h-2 bg-indigo-600 rounded-full mr-2"></span>
-                                        <a href="#" className="text-gray-700 hover:text-indigo-600 transition-colors">
-                                            {item}
+                                    <li key={item.title} className="flex flex-col">
+                                        <p className="text-gray-900 font-medium">{item.title}</p>
+                                        <p className="text-gray-600 text-sm">{item.description}</p>
+                                        <a
+                                            href={item.videoUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-indigo-600 hover:underline mt-1"
+                                        >
+                                            Ver Tutorial
                                         </a>
                                     </li>
                                 ))}
@@ -67,11 +75,9 @@ function manual() {
                         </div>
                     ))}
                 </div>
-
-
             </div>
         </div>
     );
 }
 
-export default manual;
+export default Manual;

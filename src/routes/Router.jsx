@@ -14,6 +14,8 @@ import Manual from '../pages/manual';
 import MenuUsuarios from '../components/Menu/Sidebar';  // Sidebar para usuario
 import MenuAdmin from '../components/Sidebar';          // Sidebar para admin
 import Talleres from '../pages/Talleres';
+import Profile from '../pages/Profile';
+import UpdateUsers from '../pages/UpdateUsers';
 
 export default function AppRouter() {
     return (
@@ -31,6 +33,7 @@ export default function AppRouter() {
                             <Route path="/admin/usuarios" element={<Usuarios />} />
                             <Route path="/admin/manual" element={<Manual />} />
                             <Route path="/admin/estadisticas" element={<Stats />} />
+                            <Route path="/admin/profile" element={<Profile />} />
                         </Route>
                     </Route>
 
@@ -39,6 +42,7 @@ export default function AppRouter() {
                         <Route element={<Layout Sidebar={MenuUsuarios} />}>
                             <Route path="/user/dashboard" element={<Dashboard />} />
                             <Route path='/user/Talleres' element={<Talleres />} />
+                            <Route path='/user/UpdateUsers' element={<UpdateUsers />} />
                         </Route>
                     </Route>
 

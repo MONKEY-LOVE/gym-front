@@ -45,6 +45,8 @@ const Dashboard = () => {
                     <p><strong>Nombre:</strong> {userDetails.nombre}</p>
                     <p><strong>Apellidos:</strong> {userDetails.apellido_pat} {userDetails.apellido_mat}</p>
                     <p><strong>Correo:</strong> {userDetails.correo}</p>
+                    <p><strong>Peso:</strong> {userDetails.peso}</p>
+                    <p><strong>Altura:</strong> {userDetails.altura} kg</p>
                     <p><strong>Suscripción:</strong> {userDetails.suscripcion}</p>
                     <p><strong>Fecha de inicio:</strong> {formatDate(userDetails.fecha_inicio)}</p>
                     <p><strong>Fecha de expiración:</strong> {formatDate(userDetails.fecha_expiracion)}</p>
